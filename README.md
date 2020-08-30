@@ -1,2 +1,2 @@
-# isucon-innocent-scripts
+# isucon-scripts
 isucon scripts for innocent team
