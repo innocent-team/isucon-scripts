@@ -37,6 +37,7 @@ my %langs = (
   Ruby => 'ruby',
   Node => 'nodejs',
   Python => 'python',
+  Rust => 'rust',
 );
 
 my $github_base_url = 'https://raw.githubusercontent.com/github/gitignore/master';
