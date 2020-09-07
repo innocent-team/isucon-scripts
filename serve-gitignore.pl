@@ -16,7 +16,10 @@ sub get_gitignore {
     $content .= "vendor/\n"
   }
 
-  open my $out, ">", "$langdir/.gitignore" or die "Cannot open $langdir/.gitignore";
+  open my $out, ">", "$langdir/.gitignore" or do {
+    warn "Cannot open $langdir/.gitignore: $!";
+    return;
+  };
   $out->print('#' x 80 . "\n");
   $out->print("# $lang\n");
   $out->print("# from: $url\n");
@@ -26,26 +29,30 @@ sub get_gitignore {
   print "saved in $langdir/.gitignore\n";
 }
 
-my %langs = (
-  Go => 'go',
-  Perl => 'perl',
-  Ruby => 'ruby',
-  Node => 'nodejs',
-  Python => 'python',
-  Rust => 'rust',
-);
+sub main {
+  my %langs = (
+    Go => 'go',
+    Perl => 'perl',
+    Ruby => 'ruby',
+    Node => 'nodejs',
+    Python => 'python',
+    Rust => 'rust',
+  );
 
-my $github_base_url = 'https://raw.githubusercontent.com/github/gitignore/master';
+  my $github_base_url = 'https://raw.githubusercontent.com/github/gitignore/master';
 
-foreach my $lang (sort keys %langs) {
-  my $url = "$github_base_url/$lang.gitignore";
-  get_gitignore $lang, $langs{$lang}, $url;
+  foreach my $lang (sort keys %langs) {
+    my $url = "$github_base_url/$lang.gitignore";
+    get_gitignore $lang, $langs{$lang}, $url;
+  }
+
+  # PHPのgitignoreを入れる
+  # PHP.gitignore はGitHubにないので別で対処する
+  my $url = 'https://gist.githubusercontent.com/mrclay/3100456/raw/bad04e6bfef738d58134ce4256f3ae9ee22adbbb/.gitignore';
+  get_gitignore 'PHP', 'php', $url;
 }
 
-# PHPのgitignoreを入れる
-# PHP.gitignore はGitHubにないので別で対処する
-my $url = 'https://gist.githubusercontent.com/mrclay/3100456/raw/bad04e6bfef738d58134ce4256f3ae9ee22adbbb/.gitignore';
-get_gitignore 'PHP', 'php', $url;
+main();
 
 __END__
 
