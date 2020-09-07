@@ -29,7 +29,16 @@ sub get_gitignore {
   print "saved in $langdir/.gitignore\n";
 }
 
+sub check_curl_command_available {
+  system('which curl') == 0;
+}
+
 sub main {
+  unless (check_curl_command_available()) {
+    warn 'Please install `curl` command at first';
+    exit 1;
+  }
+
   my %langs = (
     Go => 'go',
     Perl => 'perl',
