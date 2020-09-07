@@ -21,7 +21,7 @@ sub get_gitignore {
     $content .= "vendor/\n"
   }
 
-  open my $out, ">", $langdir/.gitignore" or die "Cannot open $langdir/.gitignore";
+  open my $out, ">", "$langdir/.gitignore" or die "Cannot open $langdir/.gitignore";
   print $out '#' x 80 . "\n";
   print $out "# $lang\n";
   print $out "# from: $url\n";
