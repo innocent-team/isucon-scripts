@@ -17,11 +17,11 @@ sub get_gitignore {
   }
 
   open my $out, ">", "$langdir/.gitignore" or die "Cannot open $langdir/.gitignore";
-  print $out '#' x 80 . "\n";
-  print $out "# $lang\n";
-  print $out "# from: $url\n";
-  print $out '#' x 80 . "\n";
-  print $out $content;
+  $out->print('#' x 80 . "\n");
+  $out->print("# $lang\n");
+  $out->print("# from: $url\n");
+  $out->print('#' x 80 . "\n");
+  $out->print($content);
   close $out;
   print "saved in $langdir/.gitignore\n";
 }
