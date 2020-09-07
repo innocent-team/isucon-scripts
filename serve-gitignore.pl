@@ -42,7 +42,7 @@ my %langs = (
 
 my $github_base_url = 'https://raw.githubusercontent.com/github/gitignore/master';
 
-foreach my $lang (keys %langs) {
+foreach my $lang (sort keys %langs) {
   my $url = "$github_base_url/$lang.gitignore";
   get_gitignore $lang, $langs{$lang}, $url;
 }
