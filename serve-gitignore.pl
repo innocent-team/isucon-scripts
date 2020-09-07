@@ -45,6 +45,7 @@ foreach my $lang (sort keys %langs) {
 # PHPのgitignoreを入れる
 # PHP.gitignore はGitHubにないので別で対処する
 my $url = 'https://gist.githubusercontent.com/mrclay/3100456/raw/bad04e6bfef738d58134ce4256f3ae9ee22adbbb/.gitignore';
+get_gitignore 'PHP', 'php', $url;
 
 __END__
 
