@@ -2,11 +2,6 @@
 use strict;
 use warnings;
 
-=begin comment
-各言語実装のディレクトリが置いてあるディレクトリ (ISUCON8予選なら torb/webapp/)にこのスクリプトを置いて実行すると、各言語実装のディレクトリに.gitignoreが配置される
-=end comment
-=cut
-
 sub get_gitignore {
   my ($lang, $langdir, $url) = @_;
 
@@ -51,3 +46,14 @@ foreach my $lang (sort keys %langs) {
 # PHP.gitignore はGitHubにないので別で対処する
 my $url = 'https://gist.githubusercontent.com/mrclay/3100456/raw/bad04e6bfef738d58134ce4256f3ae9ee22adbbb/.gitignore';
 
+__END__
+
+=head1 NAME
+
+serve-gitignore.pl - 各言語の.gitignoreを一気にサーブする
+
+=head1 SYNOPSIS
+
+各言語実装のディレクトリが置いてあるディレクトリ (ISUCON8予選なら torb/webapp/)にこのスクリプトを置いて実行すると、各言語実装のディレクトリに.gitignoreが配置される
+
+=cut
