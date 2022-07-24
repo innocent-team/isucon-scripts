@@ -5,6 +5,7 @@ set -ex
 function add_user {
   user=$1
   sudo useradd -m $1
+  sudo chsh $1 /bin/bash
   # NOPASSWD
   echo "$1 ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/users
 }
