@@ -1,22 +1,22 @@
 #! /bin/bash
 
-set -ex
+set -exu
 
 function add_user {
   user=$1
-  sudo useradd -m $1
-  sudo chsh $1 /bin/bash
+  sudo useradd -m $user
+  sudo chsh $user -s /bin/bash
   # NOPASSWD
-  echo "$1 ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/users
+  echo "$user ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/users
 }
 
 function put_authorized_keys {
   user=$1
   github_user=$2
-  sudo -u $1 mkdir -p /home/$1/.ssh
-  sudo -u $1 chmod 700 /home/$1/.ssh
-  sudo -u $1 curl https://github.com/$2.keys -o /home/$1/.ssh/authorized_keys
-  sudo -u $1 chmod 600 /home/$1/.ssh/authorized_keys
+  sudo -u $user mkdir -p /home/$user/.ssh
+  sudo -u $user chmod 700 /home/$user/.ssh
+  sudo -u $user curl https://github.com/$github_user.keys -o /home/$user/.ssh/authorized_keys
+  sudo -u $user chmod 600 /home/$user/.ssh/authorized_keys
 }
 
 add_user nonylene
